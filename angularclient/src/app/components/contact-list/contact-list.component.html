@@ -1,0 +1,55 @@
+<div class="row text-center">
+  <h1>Lista kontaktów</h1>
+
+</div>
+<ul class="nav nav-tabs">
+
+  <li class="nav-item ml-auto mr-1">
+    <a [routerLink]="[ '/add-company']" >
+      <button >Dodaj</button>
+    </a>
+
+  </li>
+</ul>
+<div class="row">
+  <div class="col-12">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col"><a (click)="sortByName()">Nazwa </a></th>
+        <th scope="col"><a (click)="sortByType()">Typ</a></th>
+        <th scope="col"><a (click)="sortByEmail()">Email</a></th>
+        <th  scope="col"><a (click)="sortByPhone()">Telefon</a></th>
+        <th  class="text-center" scope="col">Akcje</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let contact of contacts | paginate: { itemsPerPage: 5, currentPage: p }">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.type }}</td>
+        <td>{{ contact.email }}</td>
+        <td >{{ contact.phone }}</td>
+        <td class="text-center">
+          <a *ngIf="contact.type==='Firma'" [routerLink]="[ '/company-edit',contact.id]" class="text-white">
+          <button class="btn btn-sm btn-warning" title="Zarządzaj wyposażeniem">
+            edit
+          </button>
+          </a>
+          <a *ngIf="contact.type==='Osoba fizyczna'" [routerLink]="[ '/person-edit',contact.id]" class="text-white">
+            <button class="btn btn-sm btn-warning" title="Zarządzaj wyposażeniem">
+              edit
+            </button>
+          </a>
+          <button class="btn btn-sm btn-danger" title="Usuń"
+                  (click)="deleteContact(contact)">
+            delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+
+  </div>
+</div>

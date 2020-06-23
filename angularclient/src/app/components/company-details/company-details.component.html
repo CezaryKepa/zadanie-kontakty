@@ -1,0 +1,58 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" [routerLink]="[ '/company-details',company.id]" >Podsumowanie</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" [routerLink]="[ '/company-details-employees',company.id]"  >Pracownicy</a>
+  </li>
+  <li class="nav-item ml-auto mr-1">
+    <a [routerLink]="[ '/company-edit',company.id]" >
+      <button >Edycja</button>
+    </a>
+
+  </li>
+</ul>
+
+<div class="row ">
+  <div class="col col-lg-2 text-right">
+    <p class="ml-5 mt-5 ">Nazwa firmy:     </p>
+    <p class="ml-5 mt-1">NIP:     </p>
+    <p class="ml-5 mt-1">REGON:     </p>
+    <p class="ml-5 mt-1">KRS:     </p>
+    <p class="ml-5 mt-1">Forma prawna:     </p>
+    <p class="ml-5 mt-1">Email:     </p>
+    <p class="ml-5 mt-1">Informacje dodatkowe:     </p>
+
+  </div>
+  <div class="col col-lg-2">
+    <p class=" mt-5">{{company.name}}</p>
+    <p class=" mt-1">{{company.nip}}</p>
+    <p class=" mt-1">{{company.regon}}</p>
+    <p class=" mt-1">{{company.krs}}</p>
+    <p class=" mt-1">{{company.legalForm}}</p>
+    <p class=" mt-1">{{company.email}}</p>
+    <p class=" mt-1">{{company.additionalInfo}}</p>
+
+  </div>
+  <div class="col col-lg-2 text-right">
+    <p class="ml-5 mt-5 ">Sposób pozyskania:     </p>
+  </div>
+  <div class="col col-lg-2">
+    <p class=" mt-5">{{company.wayOfObtaining}}</p>
+  </div>
+</div>
+<hr>
+<h1 >Adresy:</h1>
+<div class="row">
+  <div class="col-12">
+    <table class="table ">
+      <tbody>
+      <tr *ngFor="let address of company.addresses">
+        <td><p class="font-weight-bold">{{ address.name }}</p>
+          <p>{{ address.street }} {{ address.buildingNumber }}/{{ address.apartmentNumber }}</p>
+          <p>{{ address.zip }} {{ address.city }}</p></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

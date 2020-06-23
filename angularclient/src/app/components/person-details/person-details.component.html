@@ -1,0 +1,50 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" [routerLink]="[ '/person-details',person.id]">Podsumowanie</a>
+  </li>
+  <li class="nav-item ml-auto mr-1">
+    <a [routerLink]="[ '/person-edit',person.id]" >
+    <button >Edycja</button>
+    </a>
+
+  </li>
+</ul>
+
+  <div class="row ">
+    <div class="col col-lg-2 text-right">
+      <p class="ml-5 mt-5 ">Imię:     </p>
+      <p class="ml-5 mt-1">Nazwisko:     </p>
+      <p class="ml-5 mt-1">Email:     </p>
+      <p class="ml-5 mt-1">Telefon:     </p>
+      <p class="ml-5 mt-1">Inofrmacje dodatkowe:     </p>
+    </div>
+    <div class="col col-lg-2">
+      <p class=" mt-5">{{person.name}}</p>
+      <p class=" mt-1">{{person.surname}}</p>
+      <p class=" mt-1">{{person.pesel}}</p>
+      <p class=" mt-1">{{person.phone}}</p>
+      <p class=" mt-1">{{person.additionalInfo}}</p>
+    </div>
+    <div class="col col-lg-2 text-right">
+      <p class="ml-5 mt-5 ">Sposób pozyskania:     </p>
+
+    </div>
+    <div class="col col-lg-2">
+      <p class=" mt-5">{{person.wayOfObtaining}}</p>
+    </div>
+  </div>
+  <hr>
+<h1 >Adresy:</h1>
+<div class="row">
+  <div class="col-12">
+    <table class="table ">
+      <tbody>
+      <tr *ngFor="let address of person.addresses">
+        <td><p class="font-weight-bold">{{ address.name }}</p>
+        <p>{{ address.street }} {{ address.buildingNumber }}/{{ address.apartmentNumber }}</p>
+          <p>{{ address.zip }} {{ address.city }}</p></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
