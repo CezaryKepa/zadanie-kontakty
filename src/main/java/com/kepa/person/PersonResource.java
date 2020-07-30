@@ -1,6 +1,7 @@
 package com.kepa.person;
 
 
+import com.kepa.company.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,14 @@ public class PersonResource {
     public List<Person> findAll() {
         return personService.findAll();
     }
+
     @GetMapping("{id}")
     public ResponseEntity<Person> findById(@PathVariable Long id) {
         return personService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @PostMapping("")
     public ResponseEntity<Person> save(@RequestBody Person person) {
         if (person.getId() != null)
@@ -45,6 +48,7 @@ public class PersonResource {
                 .toUri();
         return ResponseEntity.created(location).body(savedPerson);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<Person> update(@RequestBody Person person, @PathVariable Long id) {
         if (!id.equals(person.getId()))
@@ -54,16 +58,17 @@ public class PersonResource {
     }
 
     @DeleteMapping("delete-address/{addressId}")
-    public ResponseEntity deleteAddress(@PathVariable Long addressId) {
+    public ResponseEntity<PersonAddress> deleteAddress(@PathVariable Long addressId) {
         PersonAddress addressDeleted = personService.deleteAddress(addressId);
         return ResponseEntity.ok().body(addressDeleted);
     }
+
     @PostMapping("add-address/{personId}")
-    public ResponseEntity addAddress(@RequestBody PersonAddress address, @PathVariable Long personId) {
+    public ResponseEntity<Person> addAddress(@RequestBody PersonAddress address, @PathVariable Long personId) {
         if (address.getId() != null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Zapisywany obiekt nie może mieć ustawionego id");
 
-        Person savedPerson = personService.saveAddresss(address,personId);
+        Person savedPerson = personService.saveAddress(address, personId);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

@@ -49,8 +49,11 @@ public class CompanyService {
             throw new DuplicateException();
         });
         company.setType("Firma");
+
         companyRepository.save(company);
+
         List<Address> addresses = company.getAddresses();
+
         addresses.forEach(e -> {
             e.setCompany(company);
             adressRepository.save(e);
@@ -120,7 +123,7 @@ public class CompanyService {
         return companyEntity;
     }
 
-    public Company saveAddresss(Address address, Long companyId) {
+    public Company saveAddress(Address address, Long companyId) {
         Optional<Company> companyById = companyRepository.findById(companyId);
         Company companyEntity = companyById.orElseThrow(ContactNotFoundException::new);
         address.setCompany(companyEntity);

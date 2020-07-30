@@ -64,7 +64,7 @@ public class PersonService {
         return addressEntity;
     }
 
-    public Person saveAddresss(PersonAddress address, Long personId) {
+    public Person saveAddress(PersonAddress address, Long personId) {
         Optional<Person> personById = personRepository.findById(personId);
         Person personEntity = personById.orElseThrow(ContactNotFoundException::new);
         address.setPerson(personEntity);
